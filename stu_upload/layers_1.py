@@ -16,13 +16,13 @@ class FullyConnectedLayer(object):
         start_time = time.time()
         self.input = input
         # TODO：全连接层的前向传播，计算输出结果
-        self.output = self.weight @ input + self.bias
+        self.output = self.input @ self.weight + self.bias
         return self.output
     def backward(self, top_diff):  # 反向传播的计算
         # TODO：全连接层的反向传播，计算参数梯度和本层损失
         self.d_weight = self.input.T @ top_diff
-        self.d_bias = self.input.T @ np.sum(self.bias,axis = 0)
-        bottom_diff = self.weight.T @ top_diff
+        self.d_bias = np.sum(top_diff, axis=0)
+        bottom_diff =  top_diff @ self.weight.T
         return bottom_diff
     def update_param(self, lr):  # 参数更新
         # TODO：对全连接层参数利用参数进行更新

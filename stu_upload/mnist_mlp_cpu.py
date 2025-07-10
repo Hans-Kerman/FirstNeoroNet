@@ -118,7 +118,7 @@ class MNIST_MLP(object):
             layer.update_param(lr)
 
     def train(self):
-        max_batch = self.train_data.shape[0] / self.batch_size
+        max_batch = self.train_data.shape[0] // self.batch_size
         print('Start training...')
         for idx_epoch in range(self.max_epoch):
             self.shuffle_data()
