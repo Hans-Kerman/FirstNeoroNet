@@ -5,7 +5,6 @@ from stu_upload.mnist_mlp_cpu import MNIST_MLP, build_mnist_mlp
 import numpy as np
 import struct
 import time
-
 def evaluate(mlp):
     pred_results = np.zeros([mlp.test_data.shape[0]])
     

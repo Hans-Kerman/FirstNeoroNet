@@ -4,7 +4,7 @@ import struct
 import os
 import time
 
-from layers_1 import FullyConnectedLayer, ReLULayer, SoftmaxLossLayer
+from .layers_1 import FullyConnectedLayer, ReLULayer, SoftmaxLossLayer
 
 MNIST_DIR = "../mnist_data"
 TRAIN_DATA = "train-images-idx3-ubyte"
