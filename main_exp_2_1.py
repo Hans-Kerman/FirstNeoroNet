@@ -25,4 +25,5 @@ def evaluate(mlp):
 
 if __name__ == '__main__':
     mlp = build_mnist_mlp()
+    mlp.train()
     evaluate(mlp)

@@ -25,6 +25,21 @@ class FullyConnectedLayer(object):
         bottom_diff =  top_diff @ self.weight.T
         return bottom_diff
     def update_param(self, lr):  # 参数更新
+
+            # --- 加入这些调试打印语句 ---
+        # np.linalg.norm 用来计算矩阵或向量的模
+        # 如果模是0，说明整个梯度矩阵/向量都是0
+        d_weight_norm = np.linalg.norm(self.d_weight)
+        d_bias_norm = np.linalg.norm(self.d_bias)
+
+        # 为了避免打印太多信息，我们可以只打印第一个全连接层(fc1)的梯度信息
+        # fc1的输入维度是784，以此作为判断条件
+        if self.num_input == 784:
+            print(f"Updating fc1: d_weight_norm={d_weight_norm:.6f}, d_bias_norm={d_bias_norm:.6f}")
+        # ---------------------------
+
+
+
         # TODO：对全连接层参数利用参数进行更新
         self.weight = self.weight - lr * self.d_weight
         self.bias = self.bias - lr * self.d_bias
