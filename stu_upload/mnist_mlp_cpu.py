@@ -51,9 +51,9 @@ class MNIST_MLP(object):
     def load_data(self):
         # TODO: 调用函数 load_mnist 读取和预处理 MNIST 中训练数据和测试数据的图像和标记
         print('Loading MNIST data from files...')
-        train_images = self.load_mnist(os.path.join(MNIST_DIR, TRAIN_DATA), True)
+        train_images = self.load_mnist(os.path.join(MNIST_DIR, TRAIN_DATA), True) / 255.0
         train_labels = self.load_mnist(os.path.join(MNIST_DIR, TRAIN_LABEL), False)
-        test_images = self.load_mnist(os.path.join(MNIST_DIR, TEST_DATA), True)
+        test_images = self.load_mnist(os.path.join(MNIST_DIR, TEST_DATA), True) / 255.0
         test_labels = self.load_mnist(os.path.join(MNIST_DIR, TEST_LABEL), False)
         self.train_data = np.append(train_images, train_labels, axis=1)
         self.test_data = np.append(test_images, test_labels, axis=1)
@@ -124,7 +124,7 @@ class MNIST_MLP(object):
             self.shuffle_data()
             for idx_batch in range(max_batch):
                 batch_images = self.train_data[idx_batch*self.batch_size:(idx_batch+1)*self.batch_size, :-1]
-                batch_labels = self.train_data[idx_batch*self.batch_size:(idx_batch+1)*self.batch_size, -1]
+                batch_labels = self.train_data[idx_batch*self.batch_size:(idx_batch+1)*self.batch_size, -1].astype(int)
                 prob = self.forward(batch_images)
                 loss = self.softmax.get_loss(batch_labels)
                 self.backward()
@@ -146,7 +146,7 @@ class MNIST_MLP(object):
         print('Accuracy in test set: %f' % accuracy)
 
 def build_mnist_mlp(param_dir='weight.npy'):
-    h1, h2, e = 8, 8, 1
+    h1, h2, e = 8, 8, 10
     mlp = MNIST_MLP(hidden1=h1, hidden2=h2, max_epoch=e)
     mlp.load_data()
     mlp.build_model()
