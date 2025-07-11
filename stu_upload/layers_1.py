@@ -34,8 +34,8 @@ class FullyConnectedLayer(object):
 
         # 为了避免打印太多信息，我们可以只打印第一个全连接层(fc1)的梯度信息
         # fc1的输入维度是784，以此作为判断条件
-        if self.num_input == 784:
-            print(f"Updating fc1: d_weight_norm={d_weight_norm:.6f}, d_bias_norm={d_bias_norm:.6f}")
+        #if self.num_input == 784:
+            #print(f"Updating fc1: d_weight_norm={d_weight_norm:.6f}, d_bias_norm={d_bias_norm:.6f}")
         # ---------------------------
 
 
